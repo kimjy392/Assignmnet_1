@@ -1,0 +1,27 @@
+.card {
+    width: 500px;
+    margin-bottom: 12px;
+    padding: 20px;
+    background: #F8F9FA;
+    border: 0.5px solid #CED4DA;
+    box-sizing: border-box;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.card .title {
+    font-weight: bold;
+    line-height: 21.09px;
+}
+
+.card #commentId, .card #commentEmail {
+    margin-left: 12px;
+}
+
+.card #commentBody {
+    margin-top: 2px;
+}
+
+.card > div:nth-child(2) {
+    margin: 12px 0;
+}
