@@ -20,7 +20,6 @@ const useScroll = () => {
 
   useEffect(() => {
     let observer;
-    console.log(observerTarget.current)
     if (observerTarget.current){
         observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -32,7 +31,6 @@ const useScroll = () => {
         observer.observe(observerTarget.current);
     }
     return () => {
-      console.log(observerTarget.current, 123123)
       observer && observer.disconnect()
     };
   }, [pageIndex])
