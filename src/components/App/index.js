@@ -10,8 +10,8 @@ function App() {
     const [commentData, setCommentData] = useState([]);
     const [pageIndex, setPageIndex] = useState(1);
 
-    const observerTarget = useRef();
-    const getComment = useCallback(async() => {
+    const observerTarget = useRef(null);
+    const getComment = useCallback(async () => {
         let resData;
         try {
             resData = await fetchComment(pageIndex, 10);
@@ -19,31 +19,41 @@ function App() {
             alert(e)
             console.log(e)
         }
+        console.log(resData)
         setCommentData(preData => [...preData, ...resData]);
         setPageIndex((preState) => preState + 1);
     }, [pageIndex]);
 
 
     useEffect(() => {
-        let observer = new IntersectionObserver((entries) => {
-            console.log(entries);
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    getComment();
-                }
-            });
-        });
-        observer.observe(observerTarget.current);
+        getComment()
+    }, [])
 
+    useEffect(() => {
+        let observer;
+        console.log(observerTarget.current)
+        if (observerTarget.current){
+            let observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        getComment();
+                    }
+                });
+            });
+            observer.observe(observerTarget.current);
+        }
         return () => observer && observer.disconnect();
     }, [pageIndex])
+
+    
 
   return (
     <div className="App">
       <main className="comments">
-        {commentData.map((e) => {
+        {commentData.map((e, idx) => {
             return (
                 <Card
+                ref={commentData.length - 1 === idx ? observerTarget : null}
                 key={e.id}
                 commentId={e.id}
                 commentEmail={e.email}
@@ -51,7 +61,6 @@ function App() {
                 />
             )
         })}
-        <footer style={{height: '10px'}} ref={observerTarget}/>
       </main>
     </div>
   );

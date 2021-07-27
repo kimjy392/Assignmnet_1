@@ -1,12 +1,13 @@
 import './style.css';
+import {forwardRef, memo} from 'react'
 
-const Card = (props) => {
+const Card = memo(forwardRef((props, ref) => {
 
     const {commentId, commentEmail, commentBody} = props;
 
     return (
         <>
-            <section className='card'>
+            <section className='card' ref={ref}>
                 <div>
                     <span className='title'>Comment Id</span>
                     <span id='commentId'>{commentId}</span>
@@ -22,6 +23,6 @@ const Card = (props) => {
             </section>
         </>
     )
-}
+}))
 
 export default Card;
