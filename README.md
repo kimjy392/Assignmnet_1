@@ -46,3 +46,12 @@ npm start
 - 폴더 구조 논의 및 적용
   - 컴포넌트별 index.js, style.css를 두면서 모듈화
   - 이를 통해 컴포넌트별 수정 및 관리 용이
+
+
+
+## 개인 구현 사항
+
+* `React.memo` 활용하여 `Card component` 렌더링 최적화
+* 번외 : `scroll event`와  `Throttling` 활용하여 Infinite Scroll 구현
+  * `Throttling` 링크 : https://github.com/kimjy392/Extra-Assginment-1
+
